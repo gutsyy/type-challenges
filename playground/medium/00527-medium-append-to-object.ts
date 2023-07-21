@@ -19,7 +19,24 @@
 
 /* _____________ Your Code Here _____________ */
 
-type AppendToObject<T, U, V> = any
+// SELF DONE
+// why can't use intersection
+// https://github.com/type-challenges/type-challenges/issues/9115#issuecomment-1109465605
+type AppendToObject<T, U extends string, V> = { 
+  [K in keyof T | U] : K extends keyof T ? T[K] : V
+} 
+
+type AppendToObjectIntersection<T, U extends string, V> = { 
+  [K in U]: V
+} & T
+
+type fn1 = (arg: AppendToObject<{key: 'cat', value: 'green'}, 'home', boolean>) => void
+type fn2 = (arg: AppendToObjectIntersection<{key: 'cat', value: 'green'}, 'home', boolean>) => void
+type fn3 = (arg: {key: 'cat', value: 'green', home: boolean}) => void
+
+type Equall<X, Y> = X extends Y ? true : never
+
+type re = [Equall<fn1, fn2>, Equall<fn1, fn3>, Equall<fn2, fn3>]
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'

@@ -19,7 +19,8 @@
 
 /* _____________ Your Code Here _____________ */
 
-type StringToUnion<T extends string> = any
+// SELF DONE
+type StringToUnion<T extends string> = T extends `${infer F}${infer R}` ? F | StringToUnion<R>  : never
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'

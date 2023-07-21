@@ -12,7 +12,10 @@
 
 /* _____________ Your Code Here _____________ */
 
-type LengthOfString<S extends string> = any
+// Use anther string[] type to store all character in S 
+// USE RECURSIVE TO CAPTURE CHARACTER
+// REDO 
+type LengthOfString<S extends string, T extends string[] = []> = S extends `${infer F}${infer R}` ? LengthOfString<R, [...T, F]> : T['length']
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'

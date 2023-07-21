@@ -19,7 +19,8 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Absolute<T extends number | string | bigint> = any
+// REDO
+type Absolute<T extends number | string | bigint> = `${T}` extends `-${infer R}` ? R : `${T}` 
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
